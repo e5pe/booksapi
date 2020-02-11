@@ -1,5 +1,9 @@
 package com.books.bookapi.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +30,26 @@ public class Book {
 	
 	@NotBlank
 	private String title;
+	
+	private String description;
 	private String author;
 	private String isbn;
+	
+	@Column(name = "unit_price")
+	private BigDecimal unitPrice;
+	
+	@Column(name = "units_stock")
+	private int unitsStock;
+	
+	@Column(name = "image_url")
+	private String imageUrl;
+	private boolean active;
+	
+	@Column(name = "date_created")
+	private Date dateCreated;
+	
+	@Column(name = "date_updated")
+	private Date dateUpdated;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",nullable=false)
