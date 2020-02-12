@@ -1,14 +1,27 @@
 package com.books.bookapi.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "books")
+@Setter
+@Getter
+@ToString
 public class Book {
 
 	@Id
@@ -17,9 +30,30 @@ public class Book {
 	
 	@NotBlank
 	private String title;
+	
+	private String description;
 	private String author;
 	private String isbn;
 	
+	@Column(name = "unit_price")
+	private BigDecimal unitPrice;
+	
+	@Column(name = "units_stock")
+	private int unitsStock;
+	
+	@Column(name = "image_url")
+	private String imageUrl;
+	private boolean active;
+	
+	@Column(name = "date_created")
+	private Date dateCreated;
+	
+	@Column(name = "date_updated")
+	private Date dateUpdated;
+	
+	@ManyToOne
+	@JoinColumn(name="category_id",nullable=false)
+	private BookCategory category;
 	
 	
 	public Book() {
@@ -32,35 +66,8 @@ public class Book {
 		this.author = author;
 		this.isbn = isbn;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
 	
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
-	}
+	
 	
 	
 	
