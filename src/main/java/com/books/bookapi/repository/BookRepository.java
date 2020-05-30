@@ -15,4 +15,7 @@ import com.books.bookapi.model.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
 	@RestResource(path = "categoryid")
 	Page<Book> findByCategoryId(@Param("id") Long id, Pageable pageable);
+	
+	@RestResource(path = "searchbykeyword")
+	Page<Book> findByTitleContaining(@Param("title") String keyword, Pageable pageable);
 }
